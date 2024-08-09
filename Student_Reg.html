@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #13ef4a;
+        }
+        .container {
+            width: 500px;
+            padding: 50px;
+            background-color: #f19812;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="submit"], input[type="reset"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="reset"] {
+            background-color: #f44336;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            opacity: 0.8;
+        }
+        .details {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="Stu_Reg_Icon.JPG" alt="Student Registration Icon" width="100px" height="100px" style="margin-left: auto; margin-right: auto; display: block;">
+        <h2>Student Registration Form</h2>
+        <form id="registrationForm">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" placeholder="Phone Number" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" placeholder="Email" required>
+            
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" placeholder="Date Of Birth" required>
+            
+            <label for="address">Address</label>
+            <textarea id="address" name="address" placeholder="Address" required></textarea>
+            
+            <div class="buttons">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </div>
+        </form>
+        <div class="details" id="submittedDetails">
+            <h3>Submitted Details:</h3>
+            <p><strong>First Name:</strong> <span id="displayFirstName"></span></p>
+            <p><strong>Last Name:</strong> <span id="displayLastName"></span></p>
+            <p><strong>Phone Number:</strong> <span id="displayPhone"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Date of Birth:</strong> <span id="displayDob"></span></p>
+            <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+
+            var phonePattern = /^[0-9]{10}$/;
+            var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            document.getElementById('displayFirstName').textContent = document.getElementById('firstName').value;
+            document.getElementById('displayLastName').textContent = document.getElementById('lastName').value;
+            document.getElementById('displayPhone').textContent = document.getElementById('phone').value;
+            document.getElementById('displayEmail').textContent = document.getElementById('email').value;
+            document.getElementById('displayDob').textContent = document.getElementById('dob').value;
+            document.getElementById('displayAddress').textContent = document.getElementById('address').value;
+            
+            document.getElementById('submittedDetails').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
